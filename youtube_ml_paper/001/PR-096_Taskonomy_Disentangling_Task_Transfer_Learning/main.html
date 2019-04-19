@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+This is notes I wrote based on the YouTube video lecture which is originated from 
+https://www.youtube.com/watch?v=WjUGrzBIDv0&list=PLWKf9beHi3Tg50UoyTe6rIm20sVQOH1br&index=95&t=0s
+
+================================================================================
+
+There are various tasks in computer vision.
+
+Task transfer learning means the project which tries to make a relationship
+between computer vision tasks by using transfer learning.
+
+================================================================================
+There are relations between computer vision tasks.
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_08_15:23:52.png' alt=''><xmp>
+
+Goal to find
+- Relation can be "computationally" measured?
+- Tasks can belong to a structured space?
+- It's possible to create unified model using transfer learning?
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_08_15:26:27.png' alt=''><xmp>
+
+Computer vision tasks are related
+
+But many of them are unuseful relationships.
+
+And there are also meaningful relationships.
+
+Point is that you can train network in efficient using these relationship.
+
+================================================================================
+For example, instead you train network for depth and network for normals separately,
+you first train network over depth dataset,
+and secondly you use transfer learning (with depth-trained network) for normals
+
+Dataset for nomals doesn't need to be labeled because derivative of depth image is normal image
+
+================================================================================
+What this project wants to do is supervision-efficiency training with less labeling
+
+================================================================================
+Surface normal is to know which direction is a pixel directed to in 3D space?
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_08_15:37:45.png' alt=''><xmp>
+
+Task-specific network (train over 100% dataset)
+Scratch (train over 2% data from 100% dataset)
+From segmentation (first train net over segmentation dataset, and use 2% surface normal dataset) bad performance
+From reshading (first train net over reshading dataset, and use 2% surface normal dataset) better performance
+
+================================================================================
+So, let's perform mapping relationship between tasks into space.
+And let's use that relationship in transfer learning.
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_08_15:43:03.png' alt=''><xmp>
+
+================================================================================
+Taskonomy = Task + taxonomy
+
+Taskonomy is a fully computational method for quantifying task relationships.
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:43:02.png' alt=''><xmp>
+
+You can see 26 tasks from above illustration.
+
+But it means you can define you own tasks 
+
+For example, if you want to solve 50 vision tasks,  
+you prepare datasets to fit the method represented in this paper.
+
+Then, you can create your own Taskonomy framework.
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:44:49.png' alt=''><xmp>
+
+Final output.
+
+================================================================================
+- Tasks which are used for this paper:
+26 number of sematic, 2D, 3D tasks 
+
+- Each task has labeled dataset
+
+- There are 4 million images in total.
+
+- There are 26 networks which are optimized to each dataset
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:47:08.png' alt=''><xmp>
+
+================================================================================
+Labeling all images is tedious.
+
+So, authors create "window" which is used for 3D scan.
+
+================================================================================
+Tasks 
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:48:36.png' alt=''><xmp>
+
+================================================================================
+2.5D segmentation
+
+2.5D: input has RGB and depth
+unsupervised: unlabeled, clustering
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:50:32.png' alt=''><xmp>
+
+3D keypoints: important points
+
+3D occlusion edges: edge detection which considers occlusion
+
+Euclidean distance: 
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:52:10.png' alt=''><xmp>
+
+3D curvature: inference bending point
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:52:40.png' alt=''><xmp>
+
+================================================================================
+Ego motion: location of camera in video
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:53:41.png' alt=''><xmp>
+
+1. You train 26 networks over 26 datasets
+
+2. You perform "transfer modeling" by using 26 pretrained networks.
+
+3. Create task affinity matrix, perform normalization
+
+4. Craete graphs (that is, compute taxonomy)
+
+================================================================================
+Task specific modeling 
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:55:55.png' alt=''><xmp>
+
+1. Network: encoder + decoder
+Unlocked one means it's updated in weights.
+
+2. Detailed network structure.
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:57:19.png' alt=''><xmp>
+
+================================================================================
+Transfer modeling
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:58:16.png' alt=''><xmp>
+
+1. Freeze encoder part
+2. Add small capacity decoder, and train it over 2% of small dataset.
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_15:59:14.png' alt=''><xmp>
+
+You will get performance after transfer modeling.
+
+You collect all performance values and create matrix with them.
+
+You need to perform normalization because units which are used for 26 tasks are different
+
+For example, some task uses accuracy, some task uses MSE, etc
+
+================================================================================
+After normalization, you can get following visualized matrix
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:01:13.png' alt=''><xmp>
+
+================================================================================
+Zoomed in view.
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:01:45.png' alt=''><xmp>
+
+Thicker red in "left table": poorer performance
+
+================================================================================
+To perform normalization, you can use AHP (analytic hierarchy process)
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:02:50.png' alt=''><xmp>
+
+================================================================================
+Human readable form
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:04:17.png' alt=''><xmp>
+
+4 means it's 4 times better in relative comparison.
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:05:37.png' alt=''><xmp>
+
+By using above normalized performance data,
+you create graph.
+
+================================================================================
+When you create graph, you use 3 constraints.
+
+source only: tasks where you can get label easily (you can get 100% task-specific dataset)
+
+target only: tasks where you can't get label easily (you can't get 100% task-specific dataset)
+ 
+
+constraint1: only transfer from sources
+constraint2: all targets are transferred to
+constraint3: not exceed budget (like entire number of image)
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:11:24.png' alt=''><xmp>
+
+0,1: connect in graph.
+
+E: edge
+V: vertices
+
+Target to maximize: $$$c^Tx$$$
+
+$$$c_i=r_i \times p_i$$$
+
+$$$c_i$$$: importance
+$$$p_i$$$: performance
+$$$r_i$$$: weights between tasks (more/less important tasks)
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:14:39.png' alt=''><xmp>
+
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:24:19.png' alt=''><xmp>
+
+What authors performed
+
+1. they create 26 task specific networks
+2. $$$25\times 22$$$ number of 1st order transfer networks
+3. 22\times _{25}C_{k} number of kth order transfer networks
+
+3000 transfer networks
+47829 GPU hours
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:28:53.png' alt=''><xmp>
+
+Input query is passed, frame by frame.
+
+================================================================================
+You can do above tasks at the same time after you've create following graphs
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:29:47.png' alt=''><xmp>
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:30:53.png' alt=''><xmp>
+
+Performance measure: use win rate 
+
+Authors define gain and quality 
+
+Gain: how is it better than scratch (scratch is what uses 2% data)
+
+Quality: how is it better than what uses 100% data
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics/</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/pics//home/young/Pictures/2019_04_19_16:35:38.png' alt=''><xmp>' alt=''><xmp>
+
+</xmp>
+   </BODY>
+</HTML>
