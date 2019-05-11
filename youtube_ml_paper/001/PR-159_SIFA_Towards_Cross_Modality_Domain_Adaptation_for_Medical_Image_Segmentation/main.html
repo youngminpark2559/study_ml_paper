@@ -1,1 +1,187 @@
-a
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+https://www.youtube.com/watch?v=sR7hBJGpwQo&list=PLWKf9beHi3TgstcIn8K6dI_85_ppAxzB8&index=57&t=0s
+
+================================================================================
+Apply domain adaptation to medical image
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:11:41.png' alt=''><xmp>
+
+* Heart image via MRI
+* Use domain shift to convert MRI image to CT image
+* Use network which is trained by MRI data
+* See whether segmentations can be possible on CT image
+
+* Lower domain adaptation results in bad segmentation (1st image from right image group)
+* Good domain adaptation results in good segmentation
+
+================================================================================
+* Domain shift lowers performance
+
+* Train network over MNIST dataset
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:14:52.png' alt=''><xmp>
+* Good classification
+
+* Apply model trained over MNIST data to SVHN image data
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:15:49.png' alt=''><xmp>
+* Worsen performance
+
+================================================================================
+Domain shift
+* Train network over domain A data
+* Apply trained network over domain B data
+
+================================================================================
+* Why performance degradation happens in domain shift?
+
+* Due to different data distributions
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:18:44.png' alt=''><xmp>
+
+* You can see classifier trained over MNIST doesn't work for SVHN data
+
+================================================================================
+* Domain adaptation
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:19:56.png' alt=''><xmp>
+
+================================================================================
+Feature adaptation (paper: adversarial discriminative domain adaptation, 2017)
+* Domain adaptation in feature level
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:24:42.png' alt=''><xmp>
+* train network
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:25:57.png' alt=''><xmp>
+* train network by using "domain label"
+* use discriminator which create "good fake feature for SVHN and MNIST"
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:27:26.png' alt=''><xmp>
+* Classifier which is trained over SVHN data at first pretrain step can classify MNIST data
+
+================================================================================
+Domain adaptation method 2:
+Combine 2 adaptive strategies
+
+* Train CycleGAN first for image level domain adaptation
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:28:58.png' alt=''><xmp>
+
+* Use ADDA for feature level domain adaptation
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:30:11.png' alt=''><xmp>
+
+================================================================================
+* Images of heart
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:33:15.png' alt=''><xmp>
+* Different moodalities
+
+================================================================================
+* Problem
+* Domain experts create label for each region of heart of CT image
+* Domain experts should create labels for each region of heart of MRI image
+
+================================================================================
+* Problem 2
+* Performance degradation in domain adaptation
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:35:50.png' alt=''><xmp>
+
+================================================================================
+* Model arcitecture
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:36:43.png' alt=''><xmp>
+
+================================================================================
+* Result
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:37:07.png' alt=''><xmp>
+
+(a): without adaptation
+(b): image adaptation using CycleGAN (less performance)
+(c): feature adaptation
+(c): Image+feature adaptation
+
+================================================================================
+Workflow
+
+* Perform image adaptation by using pixel-to-pixel image transformation (GAN model)
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:38:25.png' alt=''><xmp>
+* Train generator $$$G_t$$$ which makes CT-looking image
+* Train discriminator which distinguishes fake-created-CT-image
+* Use GAN loss to train both networks
+* GAN loss
+$$$\mathcal{L}_{adv}^{t}(G_t,D_t)
+= \mathbb{E}_{x^t \sim X^t} [\log{D_t(x^t)}] +
+\mathbb{E}_{x^s \sim X^s} [\log{(1-D_t(G_t(x^s)))}]$$$
+
+* Role: create CT-looking image from MRI image
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:46:18.png' alt=''><xmp>
+
+* Pass CT-looking image into encoder to create feature images
+* Pass feature images into Decoder U to create MRI-looking image
+
+* If D_s can't distinguish CT-looking and MRI-looking images, 
+it means good training on encoder and decoder
+
+================================================================================
+Add segmentation network: Classifier C, $$$D_p$$$
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:49:22.png' alt=''><xmp>
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/study_ml_paper/master/youtube_ml_paper/001/PR-159_SIFA_Towards_Cross_Modality_Domain_Adaptation_for_Medical_Image_Segmentation/pics/2019_05_11_17:56:35.png' alt=''><xmp>
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
